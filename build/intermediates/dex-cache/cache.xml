@@ -2,46 +2,53 @@
 <items version="2" >
 
     <item
-        jar="/Users/duhyeongkim/AndroidStudioProjects/zoco1/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/1.2.1/classes.jar"
+        jar="/Users/dookim/Desktop/development/git/zoco-android-client/app/libs/gson-2.2.jar"
         jumboMode="false"
-        revision="21.0.0"
-        sha1="4b868b833b0887aa48c4e581558eef4f1196f6a2">
-        <dex dex="/Users/duhyeongkim/AndroidStudioProjects/zoco1/app/build/intermediates/pre-dexed/debug/classes-9c96a63cbb386f3195ab185e088218fa0127fd98.jar" />
+        revision="21.1.2"
+        sha1="2f5481ff752b0e69ecba7070f8b0a645e570cc22">
+        <dex dex="/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/gson-2.2-5ffe0a5ab8d6c89eda9f373d49846550ee6308de.jar" />
     </item>
     <item
-        jar="/Users/duhyeongkim/AndroidStudioProjects/zoco1/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jar="/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
         jumboMode="false"
-        revision="21.0.0"
-        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
-        <dex dex="/Users/duhyeongkim/AndroidStudioProjects/zoco1/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-20487e2779a3460e71a4a53372fc424bf55f8960.jar" />
-    </item>
-    <item
-        jar="/Users/duhyeongkim/AndroidStudioProjects/zoco1/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.0.0"
-        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
-        <dex dex="/Users/duhyeongkim/AndroidStudioProjects/zoco1/app/build/intermediates/pre-dexed/debug/classes-3fec56e7324271e6b500eb967688a9c4665a1108.jar" />
-    </item>
-    <item
-        jar="/Users/duhyeongkim/AndroidStudioProjects/zoco1/app/libs/simple-xml-2.7.1.jar"
-        jumboMode="false"
-        revision="21.0.0"
-        sha1="083623424bcfa03bd598e709765bad0816c2375d">
-        <dex dex="/Users/duhyeongkim/AndroidStudioProjects/zoco1/app/build/intermediates/pre-dexed/debug/simple-xml-2.7.1-078ff75da11cea087958982ea1ada5033b9e0359.jar" />
-    </item>
-    <item
-        jar="/Users/duhyeongkim/AndroidStudioProjects/zoco1/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
-        jumboMode="false"
-        revision="21.0.0"
+        revision="21.1.2"
         sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
-        <dex dex="/Users/duhyeongkim/AndroidStudioProjects/zoco1/app/build/intermediates/pre-dexed/debug/classes-da76477e65379fe2f688c9e1255517cff0ef2f79.jar" />
+        <dex dex="/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/classes-40c82401ce7f6b32f490ac0e688bad74bbaad4d4.jar" />
     </item>
     <item
-        jar="/Users/duhyeongkim/Desktop/development/android-sdk-macosx/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jar="/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
         jumboMode="false"
-        revision="21.0.0"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-580ea84f83fa69250e1ac2511a45010c1721c8ee.jar" />
+    </item>
+    <item
+        jar="/Users/dookim/Library/Android/sdk/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
         sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
-        <dex dex="/Users/duhyeongkim/AndroidStudioProjects/zoco1/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-d13eb002b93f5937384dc75f60d4a57dcecf4a69.jar" />
+        <dex dex="/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-d4910df4cd2aaa75c77ced4645f611f6525335b9.jar" />
+    </item>
+    <item
+        jar="/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/classes-02eab46311a99000982fd637ca9623f4b4eb6bd3.jar" />
+    </item>
+    <item
+        jar="/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/exploded-aar/de.hdodenhof/circleimageview/1.2.1/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b868b833b0887aa48c4e581558eef4f1196f6a2">
+        <dex dex="/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/classes-22778f0f1e8e9a06fcbcd30cad4baec9263af307.jar" />
+    </item>
+    <item
+        jar="/Users/dookim/Desktop/development/git/zoco-android-client/app/libs/simple-xml-2.7.1.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="083623424bcfa03bd598e709765bad0816c2375d">
+        <dex dex="/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/simple-xml-2.7.1-d34707dbd77dae13fa51ddb7a822b009e4b804be.jar" />
     </item>
 
 </items>

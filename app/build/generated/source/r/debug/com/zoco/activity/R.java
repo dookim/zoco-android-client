@@ -1439,6 +1439,7 @@ containing a value of this type.
     public static final class menu {
         public static final int global=0x7f0c0000;
         public static final int main=0x7f0c0001;
+        public static final int register=0x7f0c0002;
     }
     public static final class string {
         public static final int abc_action_bar_home_description=0x7f0a0000;
