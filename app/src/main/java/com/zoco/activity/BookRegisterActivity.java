@@ -7,17 +7,24 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Base64;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.zoco.common.ZocoNetwork;
+import com.zoco.obj.BookInfo;
 import com.zoco.obj.Item;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
 
@@ -30,6 +37,11 @@ public class BookRegisterActivity extends ActionBarActivity {
     TextView authorTV;
     TextView titleTV;
     NumberPicker numberPicker;
+    String imgStr;
+    Item bookItem;
+    CheckBox scribble;
+    CheckBox hasAnswer;
+    CheckBox checkAnswer;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -38,47 +50,43 @@ public class BookRegisterActivity extends ActionBarActivity {
         setContentView(R.layout.book_register);
 
         Intent intent = getIntent();
-        Item item = (Item) intent.getSerializableExtra(MainActivity.BOOK_INFO);
+        bookItem = (Item) intent.getSerializableExtra(MainActivity.BOOK_INFO);
 
         //url to image
         circleImageView = (CircleImageView)findViewById(R.id.book_image);
         priceTV = (TextView)findViewById(R.id.price);
         authorTV = (TextView)findViewById(R.id.author);
         titleTV = (TextView)findViewById(R.id.title);
+        scribble = (CheckBox)findViewById(R.id.scribble);
+        hasAnswer = (CheckBox)findViewById(R.id.hasAnswer);
+        checkAnswer = (CheckBox)findViewById(R.id.checkAnswer);
+
         numberPicker = (NumberPicker)findViewById(R.id.numberPicker);
         numberPicker.setWrapSelectorWheel(true);
         numberPicker.setMinValue(0);
 
         String[] prices;
 
-        if(item.price%500 == 0) {
-            prices = new String[item.price/500+1];
-            numberPicker.setMaxValue(item.price/500);
+        if(bookItem.price%500 == 0) {
+            prices = new String[bookItem.price/500+1];
+            numberPicker.setMaxValue(bookItem.price/500);
         } else {
-            prices = new String[(item.price/500) + 2];
-            numberPicker.setMaxValue((item.price/500) + 1);
-            prices[(item.price/500)] = "0";
+            prices = new String[(bookItem.price/500) + 2];
+            numberPicker.setMaxValue((bookItem.price/500) + 1);
+            prices[(bookItem.price/500)] = "0";
         }
         int i = 0;
-        for(int price = item.price; price >= 0; price -= 500) {
+        for(int price = bookItem.price; price >= 0; price -= 500) {
             prices[i++] = price + "";
         }
 
-
-
-        Toast.makeText(getBaseContext(),i + "",Toast.LENGTH_LONG).show();
-
         numberPicker.setDisplayedValues(prices);
 
+        new DownloadImageTask(circleImageView).execute(bookItem.image);
 
-        //Toast.makeText(getBaseContext(), ""+item.price,Toast.LENGTH_LONG).show();
-
-        new DownloadImageTask(circleImageView)
-                .execute(item.image);
-
-        priceTV.setText(item.price + "");
-        authorTV.setText(item.author);
-        titleTV.setText(item.title);
+        priceTV.setText(bookItem.price + "");
+        authorTV.setText(bookItem.author);
+        titleTV.setText(bookItem.title);
 		
 	}
 
@@ -93,9 +101,38 @@ public class BookRegisterActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.register) {
-            Toast.makeText(getBaseContext(), "register", Toast.LENGTH_LONG).show();
+
+            int selectedPrice = Integer.parseInt(numberPicker.getDisplayedValues()[numberPicker.getValue()]);
+            BookInfo bookInfo = new BookInfo("doo871128@gmail.com",bookItem.isbn,bookItem.author,bookItem.price,selectedPrice,scribble.isChecked(),checkAnswer.isChecked(),hasAnswer.isChecked(),"1");
+            Gson gson = new Gson();
+            String json=gson.toJson(bookInfo);
+            //Toast.makeText(getBaseContext(), json, Toast.LENGTH_LONG).show();
+            new RegisterBookTask().execute(json);
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    private class RegisterBookTask extends AsyncTask<String, Void, String> {
+
+
+        protected String doInBackground(String... params) {
+            //0번째에서 뭐가 날라와? json이 날라오지.
+            String json = params[0];
+            String result= null;
+            try {
+                result = new ZocoNetwork().setPostOption(ZocoNetwork.URL_4_REGISTER_BOOK,json).execute();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+            //Toast.makeText(getBaseContext(),result + "",Toast.LENGTH_LONG).show();
+
+            return result;
+        }
+
+        protected void onPostExecute(String result) {
+            Toast.makeText(getBaseContext(),result + "",Toast.LENGTH_LONG).show();
+
+        }
     }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
@@ -111,6 +148,8 @@ public class BookRegisterActivity extends ActionBarActivity {
             try {
                 InputStream in = new java.net.URL(urldisplay).openStream();
                 mIcon11 = BitmapFactory.decodeStream(in);
+
+                //
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
@@ -119,7 +158,12 @@ public class BookRegisterActivity extends ActionBarActivity {
         }
 
         protected void onPostExecute(Bitmap result) {
+
             bmImage.setImageBitmap(result);
+            ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+            result.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
+            byte[] byteArray = byteArrayOutputStream .toByteArray();
+            imgStr = Base64.encodeToString(byteArray, Base64.NO_WRAP);
         }
     }
 }

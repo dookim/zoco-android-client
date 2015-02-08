@@ -1345,9 +1345,7 @@ containing a value of this type.
         public static final int author=0x7f080043;
         public static final int beginning=0x7f080013;
         public static final int book_image=0x7f080042;
-        public static final int checkBox=0x7f080045;
-        public static final int checkBox2=0x7f080046;
-        public static final int checkBox3=0x7f080047;
+        public static final int checkAnswer=0x7f080046;
         public static final int checkbox=0x7f080029;
         public static final int collapseActionView=0x7f080017;
         public static final int container=0x7f080040;
@@ -1361,6 +1359,7 @@ containing a value of this type.
         public static final int end=0x7f080014;
         public static final int expand_activities_button=0x7f080022;
         public static final int expanded_menu=0x7f080028;
+        public static final int hasAnswer=0x7f080047;
         public static final int home=0x7f080004;
         public static final int homeAsUp=0x7f08000d;
         public static final int icon=0x7f080026;
@@ -1379,6 +1378,7 @@ containing a value of this type.
         public static final int progress_horizontal=0x7f080006;
         public static final int radio=0x7f08002b;
         public static final int register=0x7f08004c;
+        public static final int scribble=0x7f080045;
         public static final int search_badge=0x7f080035;
         public static final int search_bar=0x7f080034;
         public static final int search_button=0x7f080036;

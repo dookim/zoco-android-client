@@ -102,7 +102,7 @@
 
 
             <CheckBox
-                android:id="@+id/checkBox"
+                android:id="@+id/scribble"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="scribble?"
@@ -110,14 +110,14 @@
                 />
 
             <CheckBox
-                android:id="@+id/checkBox2"
+                android:id="@+id/checkAnswer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
 
                 android:text="answer question?" />
 
             <CheckBox
-                android:id="@+id/checkBox3"
+                android:id="@+id/hasAnswer"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="have answer?" />

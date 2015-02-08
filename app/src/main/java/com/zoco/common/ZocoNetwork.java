@@ -28,6 +28,10 @@ public class ZocoNetwork {
 	private String data;
 	private Method method;
 
+    public final static String SERVER_URL = "http://14.49.36.193:55555/zoco/client/";
+    public final static String SUFFIX_4_REGISTER_BOOK = "register_book";
+    public final static String URL_4_REGISTER_BOOK = SERVER_URL + SUFFIX_4_REGISTER_BOOK;
+
 	public ZocoNetwork setPostOption(String url, String data) {
 		setNetworkOption(url, data, Method.POST);
 		return this;

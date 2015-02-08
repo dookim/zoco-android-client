@@ -190,14 +190,14 @@ public class MainActivity extends ActionBarActivity implements
             if(requestResult == RESULT_OK) {
                 String contents = intent.getStringExtra("SCAN_RESULT");
 //				Toast.makeText(getBaseContext(), "result : " + contents, Toast.LENGTH_LONG).show();
-                BookRegiserWorker worker = new BookRegiserWorker();
+                BookScanTask worker = new BookScanTask();
                 worker.execute(contents);
 
             }
         }
     }
     //처음 url, progress 값,
-    class BookRegiserWorker extends AsyncTask<String, Void, String> {
+    class BookScanTask extends AsyncTask<String, Void, String> {
 
         @Override
         protected String doInBackground(String... params) {
