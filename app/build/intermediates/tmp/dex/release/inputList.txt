@@ -1,0 +1,8 @@
+C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\classes\release
+C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\release\support-annotations-21.0.3-8f86756d91099b7531960f93d5eba470c68d3a9a.jar
+C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\release\classes-39cc3d3a9e38106e16ece899653ae1bdd5a8cbc4.jar
+C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\release\gson-2.2-4d377e99def95bbdb76ce4853d4a209ef028b4de.jar
+C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\release\internal_impl-21.0.3-eecbb1ca6923a8fcec0f8237f55997034dc07824.jar
+C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\release\simple-xml-2.7.1-8e0db65c673d17bd4debfd76f1cf2d2ce9cc07f5.jar
+C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\release\classes-9f20c0ef825b60bae5cd22ff2532123f8aa69a1d.jar
+C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\release\classes-0cab7edb8891fa1a7503feb098bdfc842d3b76f9.jar

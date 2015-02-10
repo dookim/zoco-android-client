@@ -7,22 +7,22 @@ public class BookInfo {
     public String email;
     public String isbn;
     public String author;
-    public int origin_price;
+    public int ori_price;
     public int price;
-    public boolean isScribble;
-    public boolean isAnswer;
-    public boolean hasAnswer;
-    public String imgStr;
+    public boolean scribble;
+    public boolean check_answer;
+    public boolean have_answer;
+    public String img_str;
 
-    public BookInfo(String email, String isbn, String author, int origin_price, int price, boolean isScribble, boolean isAnswer, boolean hasAnswer, String imgStr) {
+    public BookInfo(String email, String isbn, String author, int ori_price, int price, boolean scribble, boolean have_answer, boolean check_answer, String img_str) {
         this.email = email;
         this.isbn = isbn;
         this.author = author;
-        this.origin_price = origin_price;
+        this.ori_price = ori_price;
         this.price = price;
-        this.isScribble = isScribble;
-        this.isAnswer = isAnswer;
-        this.hasAnswer = hasAnswer;
-        this.imgStr = imgStr;
+        this.scribble = scribble;
+        this.check_answer = check_answer;
+        this.have_answer = have_answer;
+        this.img_str = img_str;
     }
 }
