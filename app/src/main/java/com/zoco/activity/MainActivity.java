@@ -27,9 +27,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Toast;
 
+import com.google.gson.Gson;
+import com.zoco.common.ReqTask;
 import com.zoco.common.ZocoConstants;
 import com.zoco.common.ZocoNetwork;
 import com.zoco.obj.Book;
+import com.zoco.obj.User;
 
 public class MainActivity extends ActionBarActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks , SearchView.OnQueryTextListener {
@@ -61,10 +64,10 @@ public class MainActivity extends ActionBarActivity implements
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        //login
+        User user = new User("doo871128@gmail.com","hufs");
+        new ReqTask(getBaseContext()).execute(ZocoNetwork.URL_4_LOGIN, new Gson().toJson(user));
     }
-	/*
-	 * actionbar있는뿐 찾을
-	 */
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {

@@ -6,5 +6,8 @@ package com.zoco.obj;
 public class User {
     public String email;
     public String univ;
-
+    public User(String email, String univ) {
+        this.email = email;
+        this.univ = univ;
+    }
 }

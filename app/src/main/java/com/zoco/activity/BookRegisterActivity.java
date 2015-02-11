@@ -19,6 +19,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
+import com.zoco.common.ReqTask;
 import com.zoco.common.ZocoNetwork;
 import com.zoco.obj.BookInfo;
 import com.zoco.obj.Item;
@@ -103,37 +104,15 @@ public class BookRegisterActivity extends ActionBarActivity {
         if(id == R.id.register) {
 
             int selectedPrice = Integer.parseInt(numberPicker.getDisplayedValues()[numberPicker.getValue()]);
-            BookInfo bookInfo = new BookInfo("doo871128@gmail.com",bookItem.isbn,bookItem.author,bookItem.price,selectedPrice,scribble.isChecked(),checkAnswer.isChecked(),hasAnswer.isChecked(),"1");
-            Gson gson = new Gson();
-            String json=gson.toJson(bookInfo);
-            //Toast.makeText(getBaseContext(), json, Toast.LENGTH_LONG).show();
-            new RegisterBookTask().execute(json);
+            BookInfo bookInfo = new BookInfo("doo871128@gmail.com",bookItem.isbn,bookItem.author,bookItem.price,selectedPrice,scribble.isChecked(),checkAnswer.isChecked(),hasAnswer.isChecked(),imgStr);
+            String json = new Gson().toJson(bookInfo);
+            Toast.makeText(getBaseContext(), json, Toast.LENGTH_LONG).show();
+            new ReqTask(getBaseContext()).execute(ZocoNetwork.URL_4_REGISTER_BOOK,json);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    private class RegisterBookTask extends AsyncTask<String, Void, String> {
 
-
-        protected String doInBackground(String... params) {
-            //0번째에서 뭐가 날라와? json이 날라오지.
-            String json = params[0];
-            String result= null;
-            try {
-                result = new ZocoNetwork().setPostOption(ZocoNetwork.URL_4_REGISTER_BOOK,json).execute();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-            //Toast.makeText(getBaseContext(),result + "",Toast.LENGTH_LONG).show();
-
-            return result;
-        }
-
-        protected void onPostExecute(String result) {
-            Toast.makeText(getBaseContext(),result + "",Toast.LENGTH_LONG).show();
-
-        }
-    }
 
     private class DownloadImageTask extends AsyncTask<String, Void, Bitmap> {
         ImageView bmImage;
@@ -148,8 +127,6 @@ public class BookRegisterActivity extends ActionBarActivity {
             try {
                 InputStream in = new java.net.URL(urldisplay).openStream();
                 mIcon11 = BitmapFactory.decodeStream(in);
-
-                //
             } catch (Exception e) {
                 Log.e("Error", e.getMessage());
                 e.printStackTrace();
