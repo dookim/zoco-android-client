@@ -1,8 +1,8 @@
-C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\classes\debug
-C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\debug\support-annotations-21.0.3-0242e03cd59fe7866a66bd4a95b67553c3e970c1.jar
-C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\debug\classes-39cc3d3a9e38106e16ece899653ae1bdd5a8cbc4.jar
-C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\debug\gson-2.2-4d377e99def95bbdb76ce4853d4a209ef028b4de.jar
-C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\debug\internal_impl-21.0.3-eecbb1ca6923a8fcec0f8237f55997034dc07824.jar
-C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\debug\simple-xml-2.7.1-8e0db65c673d17bd4debfd76f1cf2d2ce9cc07f5.jar
-C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\debug\classes-9f20c0ef825b60bae5cd22ff2532123f8aa69a1d.jar
-C:\Users\user\Desktop\development\git\zoco-android-client\app\build\intermediates\pre-dexed\debug\classes-0cab7edb8891fa1a7503feb098bdfc842d3b76f9.jar
+/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/classes/debug
+/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-d4910df4cd2aaa75c77ced4645f611f6525335b9.jar
+/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/classes-22778f0f1e8e9a06fcbcd30cad4baec9263af307.jar
+/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/gson-2.2-5ffe0a5ab8d6c89eda9f373d49846550ee6308de.jar
+/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-580ea84f83fa69250e1ac2511a45010c1721c8ee.jar
+/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/simple-xml-2.7.1-d34707dbd77dae13fa51ddb7a822b009e4b804be.jar
+/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/classes-02eab46311a99000982fd637ca9623f4b4eb6bd3.jar
+/Users/dookim/Desktop/development/git/zoco-android-client/app/build/intermediates/pre-dexed/debug/classes-40c82401ce7f6b32f490ac0e688bad74bbaad4d4.jar

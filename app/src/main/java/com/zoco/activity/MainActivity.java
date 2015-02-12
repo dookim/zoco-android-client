@@ -1,6 +1,8 @@
 package com.zoco.activity;
 
+import java.util.ArrayList;
 import java.util.List;
+import android.os.Handler;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -12,6 +14,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -32,7 +35,10 @@ import com.zoco.common.ReqTask;
 import com.zoco.common.ZocoConstants;
 import com.zoco.common.ZocoNetwork;
 import com.zoco.obj.Book;
+import com.zoco.obj.BookInfos;
 import com.zoco.obj.User;
+
+
 
 public class MainActivity extends ActionBarActivity implements
         NavigationDrawerFragment.NavigationDrawerCallbacks , SearchView.OnQueryTextListener {
@@ -66,7 +72,7 @@ public class MainActivity extends ActionBarActivity implements
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         //login
         User user = new User("doo871128@gmail.com","hufs");
-        new ReqTask(getBaseContext()).execute(ZocoNetwork.URL_4_LOGIN, new Gson().toJson(user));
+        new ReqTask(getBaseContext(),ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_LOGIN, new Gson().toJson(user));
     }
 
     @Override
@@ -154,11 +160,20 @@ public class MainActivity extends ActionBarActivity implements
 
     public boolean onQueryTextChange(String newText) {
         //mStatusView.setText("Query = " + newText);
+        //Toast.makeText(getBaseContext(),newText,Toast.LENGTH_LONG).show();
         return false;
     }
-
+    //query짜서 보낸 데이터넣는 과정
     public boolean onQueryTextSubmit(String query) {
-        //mStatusView.setText("Query = " + query + " : submitted");
+        String url = ZocoNetwork.URL_4_QUERY_BOOK + query;
+        Handler handler = new Handler() {
+          public void handleMessage(Message msg) {
+              String result = (String) msg.obj;
+              Toast.makeText(getBaseContext(),result,Toast.LENGTH_LONG).show();
+              BookInfos infos=new Gson().fromJson(result, BookInfos.class);
+          }
+        };
+        new ReqTask(getBaseContext(),ZocoNetwork.Method.GET).setHandler(handler).execute(url);
         return false;
     }
 

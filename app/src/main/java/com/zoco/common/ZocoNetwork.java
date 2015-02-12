@@ -14,10 +14,6 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.params.HttpParams;
 
-import android.os.Handler;
-import android.os.Message;
-import android.util.Log;
-
 public class ZocoNetwork {
 
 	public enum Method {
@@ -28,11 +24,14 @@ public class ZocoNetwork {
 	private String data;
 	private Method method;
 
-    public final static String SERVER_URL = "http://14.49.36.193:55555/zoco/client/";
+    public final static String SERVER_URL_4_WRITE = "http://14.49.36.193:55555/zoco/client/";
+    public final static String SERVER_URL_4_READ = "http://14.49.36.193:33333/zoco/client/";
     public final static String SUFFIX_4_REGISTER_BOOK = "register_book";
     public final static String SUFFIX_4_LOGIN = "login";
-    public final static String URL_4_REGISTER_BOOK = SERVER_URL + SUFFIX_4_REGISTER_BOOK;
-    public final static String URL_4_LOGIN = SERVER_URL + SUFFIX_4_LOGIN;
+    public final static String SUFFIX_4_QUERY_BOOK = "query_book/?query=";
+    public final static String URL_4_REGISTER_BOOK = SERVER_URL_4_WRITE + SUFFIX_4_REGISTER_BOOK;
+    public final static String URL_4_LOGIN = SERVER_URL_4_WRITE + SUFFIX_4_LOGIN;
+    public final static String URL_4_QUERY_BOOK = SERVER_URL_4_READ + SUFFIX_4_QUERY_BOOK;
 
 	public ZocoNetwork setPostOption(String url, String data) {
 		setNetworkOption(url, data, Method.POST);
