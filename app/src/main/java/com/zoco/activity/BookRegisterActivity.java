@@ -102,7 +102,6 @@ public class BookRegisterActivity extends ActionBarActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         int id = item.getItemId();
         if(id == R.id.register) {
-
             int selectedPrice = Integer.parseInt(numberPicker.getDisplayedValues()[numberPicker.getValue()]);
             BookInfo bookInfo = new BookInfo("doo871128@gmail.com",bookItem.isbn,bookItem.author,bookItem.price,selectedPrice,scribble.isChecked(),checkAnswer.isChecked(),hasAnswer.isChecked(),imgStr);
             String json = new Gson().toJson(bookInfo);

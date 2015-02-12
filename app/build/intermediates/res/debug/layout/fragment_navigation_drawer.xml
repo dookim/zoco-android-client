@@ -7,4 +7,4 @@
     android:divider="@android:color/transparent"
     android:dividerHeight="0dp"
     tools:context="com.zoco.activity.NavigationDrawerFragment" />
-<!-- From: file:/C:/Users/user/Desktop/development/git/zoco-android-client/app/src/main/res/layout/fragment_navigation_drawer.xml -->
+<!-- From: file:/Users/dookim/Desktop/development/git/zoco-android-client/app/src/main/res/layout/fragment_navigation_drawer.xml -->
