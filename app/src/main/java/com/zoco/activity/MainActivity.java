@@ -33,6 +33,7 @@ import android.widget.Toast;
 import com.google.gson.Gson;
 import com.zoco.common.ReqTask;
 import com.zoco.common.ZocoConstants;
+import com.zoco.common.ZocoHandler;
 import com.zoco.common.ZocoNetwork;
 import com.zoco.obj.Book;
 import com.zoco.obj.BookInfos;
@@ -67,7 +68,9 @@ public class MainActivity extends ActionBarActivity implements
                 .findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
-        // Set up the drawer.
+        //제목 저자 가격
+
+       // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         //login
@@ -165,14 +168,17 @@ public class MainActivity extends ActionBarActivity implements
     }
     //query짜서 보낸 데이터넣는 과정
     public boolean onQueryTextSubmit(String query) {
+        //url바꿔야함
         String url = ZocoNetwork.URL_4_QUERY_BOOK + query;
-        Handler handler = new Handler() {
-          public void handleMessage(Message msg) {
-              String result = (String) msg.obj;
-              Toast.makeText(getBaseContext(),result,Toast.LENGTH_LONG).show();
-              BookInfos infos=new Gson().fromJson(result, BookInfos.class);
-          }
+        Handler handler = new ZocoHandler() {
+            @Override
+            public void onReceive(String result) {
+                Toast.makeText(getBaseContext(),result,Toast.LENGTH_LONG).show();
+                BookInfos infos=new Gson().fromJson(result, BookInfos.class);
+            }
         };
+
+
         new ReqTask(getBaseContext(),ZocoNetwork.Method.GET).setHandler(handler).execute(url);
         return false;
     }

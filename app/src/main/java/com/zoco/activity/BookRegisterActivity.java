@@ -103,7 +103,7 @@ public class BookRegisterActivity extends ActionBarActivity {
         int id = item.getItemId();
         if(id == R.id.register) {
             int selectedPrice = Integer.parseInt(numberPicker.getDisplayedValues()[numberPicker.getValue()]);
-            BookInfo bookInfo = new BookInfo("doo871128@gmail.com",bookItem.isbn,bookItem.author,bookItem.price,selectedPrice,scribble.isChecked(),checkAnswer.isChecked(),hasAnswer.isChecked(),imgStr);
+            BookInfo bookInfo = new BookInfo("doo871128@gmail.com",bookItem.isbn,bookItem.author,bookItem.price,selectedPrice,scribble.isChecked(),checkAnswer.isChecked(),hasAnswer.isChecked(),imgStr,bookItem.title);
             String json = new Gson().toJson(bookInfo);
             Toast.makeText(getBaseContext(), json, Toast.LENGTH_LONG).show();
             new ReqTask(getBaseContext(),ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_REGISTER_BOOK,json);
