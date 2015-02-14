@@ -7,12 +7,20 @@ import java.io.InputStreamReader;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+
+import org.apache.http.client.CookieStore;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.protocol.ClientContext;
 import org.apache.http.entity.StringEntity;
+
+import org.apache.http.impl.client.BasicCookieStore;
 import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.cookie.BasicClientCookie;
 import org.apache.http.params.HttpParams;
+import org.apache.http.protocol.BasicHttpContext;
+import org.apache.http.protocol.HttpContext;
 
 public class ZocoNetwork {
 
@@ -30,8 +38,11 @@ public class ZocoNetwork {
     public final static String SUFFIX_4_LOGIN = "login";
     public final static String SUFFIX_4_QUERY_BOOK = "query_book/?query=";
     public final static String URL_4_REGISTER_BOOK = SERVER_URL_4_WRITE + SUFFIX_4_REGISTER_BOOK;
-    public final static String URL_4_LOGIN = SERVER_URL_4_WRITE + SUFFIX_4_LOGIN;
+    public final static String URL_4_REGISTER_USER = SERVER_URL_4_WRITE + SUFFIX_4_LOGIN;
     public final static String URL_4_QUERY_BOOK = SERVER_URL_4_READ + SUFFIX_4_QUERY_BOOK;
+    public final static String URL_4_LOGIN = SERVER_URL_4_READ + SUFFIX_4_LOGIN;
+
+    public static HttpClient client = new DefaultHttpClient();
 
 	public ZocoNetwork setPostOption(String url, String data) {
 		setNetworkOption(url, data, Method.POST);
@@ -61,9 +72,16 @@ public class ZocoNetwork {
 
 	private String sendGetMethod() throws IllegalStateException, IOException {
 
-		HttpClient client = new DefaultHttpClient();
-		setHttpParams(client.getParams());
 
+		setHttpParams(client.getParams());
+        /*
+        CookieStore cookieStore = new BasicCookieStore();
+        BasicClientCookie cookie = new BasicClientCookie("email", "doo871128");
+        cookieStore.addCookie(cookie);
+        HttpContext localContext = new BasicHttpContext();
+
+        localContext.setAttribute(ClientContext.COOKIE_STORE, cookieStore);
+        */
 		HttpGet get = new HttpGet(url);
 		HttpResponse responseGet = client.execute(get);
 		return convertResponseToString(responseGet);
@@ -72,7 +90,7 @@ public class ZocoNetwork {
 
 	private String sendPostMethod() throws IllegalStateException, IOException {
 
-		HttpClient client = new DefaultHttpClient();
+
 		setHttpParams(client.getParams());
 
 		HttpPost post = new HttpPost(url);
@@ -117,6 +135,7 @@ public class ZocoNetwork {
 		params.setParameter("http.protocol.expect-continue", false);
 		params.setParameter("http.connection.timeout", 5000);
 		params.setParameter("http.socket.timeout", 5000);
+
 	}
 
 }

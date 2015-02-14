@@ -1,6 +1,5 @@
 package com.zoco.activity;
 
-import java.util.ArrayList;
 import java.util.List;
 import android.os.Handler;
 
@@ -14,7 +13,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Message;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -75,7 +73,10 @@ public class MainActivity extends ActionBarActivity implements
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         //login
         User user = new User("doo871128@gmail.com","hufs");
-        new ReqTask(getBaseContext(),ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_LOGIN, new Gson().toJson(user));
+        String userData = new Gson().toJson(user);
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_LOGIN,userData);
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_REGISTER_USER,userData);
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.GET).execute(ZocoNetwork.SERVER_URL_4_READ + "test");
     }
 
     @Override
@@ -169,7 +170,7 @@ public class MainActivity extends ActionBarActivity implements
     //query짜서 보낸 데이터넣는 과정
     public boolean onQueryTextSubmit(String query) {
         //url바꿔야함
-        String url = ZocoNetwork.URL_4_QUERY_BOOK + query;
+        String url = ZocoNetwork.URL_4_QUERY_BOOK + query + "&offset = 0";
         Handler handler = new ZocoHandler() {
             @Override
             public void onReceive(String result) {
@@ -177,7 +178,6 @@ public class MainActivity extends ActionBarActivity implements
                 BookInfos infos=new Gson().fromJson(result, BookInfos.class);
             }
         };
-
 
         new ReqTask(getBaseContext(),ZocoNetwork.Method.GET).setHandler(handler).execute(url);
         return false;
