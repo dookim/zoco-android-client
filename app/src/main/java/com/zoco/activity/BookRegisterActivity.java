@@ -1,6 +1,5 @@
 package com.zoco.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -25,9 +24,7 @@ import com.zoco.obj.BookInfo;
 import com.zoco.obj.Item;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.io.InputStream;
-import java.util.ArrayList;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -136,6 +133,7 @@ public class BookRegisterActivity extends ActionBarActivity {
         protected void onPostExecute(Bitmap result) {
 
             bmImage.setImageBitmap(result);
+            //서버에 업로드 하기위해 img str를 생성함.
             ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
             result.compress(Bitmap.CompressFormat.PNG, 100, byteArrayOutputStream);
             byte[] byteArray = byteArrayOutputStream .toByteArray();

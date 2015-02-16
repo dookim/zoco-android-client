@@ -27,6 +27,17 @@
          The drawer is given a fixed width in dp and extends the full height of
          the container.
     -->
+    
+    <LinearLayout
+        android:id="@+id/book"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical">
+        <ListView
+            android:id="@+id/book_list"
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent"></ListView>
+        </LinearLayout>
 
     <fragment
         android:id="@+id/navigation_drawer"

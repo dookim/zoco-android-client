@@ -1,26 +1,18 @@
 package com.zoco.common;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.StringEntity;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.HttpParams;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-
-import org.apache.http.client.CookieStore;
-import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.protocol.ClientContext;
-import org.apache.http.entity.StringEntity;
-
-import org.apache.http.impl.client.BasicCookieStore;
-import org.apache.http.impl.client.DefaultHttpClient;
-import org.apache.http.impl.cookie.BasicClientCookie;
-import org.apache.http.params.HttpParams;
-import org.apache.http.protocol.BasicHttpContext;
-import org.apache.http.protocol.HttpContext;
 
 public class ZocoNetwork {
 
@@ -36,11 +28,14 @@ public class ZocoNetwork {
     public final static String SERVER_URL_4_READ = "http://14.49.36.193:33333/zoco/client/";
     public final static String SUFFIX_4_REGISTER_BOOK = "register_book";
     public final static String SUFFIX_4_LOGIN = "login";
+    public final static String SUFFIX_4_QUERY_IMAGE = "query_image/?isbn=";
     public final static String SUFFIX_4_QUERY_BOOK = "query_book/?query=";
     public final static String URL_4_REGISTER_BOOK = SERVER_URL_4_WRITE + SUFFIX_4_REGISTER_BOOK;
     public final static String URL_4_REGISTER_USER = SERVER_URL_4_WRITE + SUFFIX_4_LOGIN;
     public final static String URL_4_QUERY_BOOK = SERVER_URL_4_READ + SUFFIX_4_QUERY_BOOK;
+    public final static String URL_4_QUERY_IMAGE = SERVER_URL_4_READ + SUFFIX_4_QUERY_IMAGE;
     public final static String URL_4_LOGIN = SERVER_URL_4_READ + SUFFIX_4_LOGIN;
+
 
     public static HttpClient client = new DefaultHttpClient();
 

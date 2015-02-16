@@ -1,11 +1,5 @@
 package com.zoco.activity;
 
-import java.util.List;
-import android.os.Handler;
-
-import org.simpleframework.xml.Serializer;
-import org.simpleframework.xml.core.Persister;
-
 import android.app.Activity;
 import android.app.SearchManager;
 import android.app.SearchableInfo;
@@ -13,6 +7,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.widget.DrawerLayout;
@@ -26,6 +21,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.Toast;
 
 import com.google.gson.Gson;
@@ -37,10 +33,17 @@ import com.zoco.obj.Book;
 import com.zoco.obj.BookInfos;
 import com.zoco.obj.User;
 
+import org.simpleframework.xml.Serializer;
+import org.simpleframework.xml.core.Persister;
+
+import java.io.File;
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.List;
 
 
 public class MainActivity extends ActionBarActivity implements
-        NavigationDrawerFragment.NavigationDrawerCallbacks , SearchView.OnQueryTextListener {
+        NavigationDrawerFragment.NavigationDrawerCallbacks, SearchView.OnQueryTextListener {
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the
@@ -57,6 +60,11 @@ public class MainActivity extends ActionBarActivity implements
 
     public static final String BOOK_INFO = "BOOK_INFO";
 
+    BookInfos infos = new BookInfos();
+    BookListAdapter bookListAdapter;
+    ListView bookListView;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -68,15 +76,35 @@ public class MainActivity extends ActionBarActivity implements
 
         //제목 저자 가격
 
-       // Set up the drawer.
+        // Set up the drawer.
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         //login
-        User user = new User("doo871128@gmail.com","hufs");
+        login();
+
+        //make dir for image;
+        mkImageDir();
+
+        //set for listview
+        bookListAdapter = new BookListAdapter(getBaseContext(), infos);
+        bookListView = (ListView) findViewById(R.id.book_list);
+        bookListView.setAdapter(bookListAdapter);
+
+    }
+
+    private void login() {
+        User user = new User("doo871128@gmail.com", "hufs");
         String userData = new Gson().toJson(user);
-        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_LOGIN,userData);
-        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_REGISTER_USER,userData);
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_LOGIN, userData);
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_REGISTER_USER, userData);
         new ReqTask(getBaseContext(), ZocoNetwork.Method.GET).execute(ZocoNetwork.SERVER_URL_4_READ + "test");
+    }
+
+    private void mkImageDir() {
+        File file = new File(ZocoConstants.ZOCO_IMAGE_DIR);
+        if (!file.exists()) {
+            file.mkdir();
+        }
     }
 
     @Override
@@ -109,6 +137,7 @@ public class MainActivity extends ActionBarActivity implements
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
+
     /*
      * 네비게이션 바가 열리거나 닫혔을때마다 콜백된다.
      * 물론 oncreate가 불린후에도 콜백된다.
@@ -131,7 +160,6 @@ public class MainActivity extends ActionBarActivity implements
         }
 
         return true;
-
 
 
     }
@@ -167,19 +195,29 @@ public class MainActivity extends ActionBarActivity implements
         //Toast.makeText(getBaseContext(),newText,Toast.LENGTH_LONG).show();
         return false;
     }
+
     //query짜서 보낸 데이터넣는 과정
     public boolean onQueryTextSubmit(String query) {
         //url바꿔야함
-        String url = ZocoNetwork.URL_4_QUERY_BOOK + query + "&offset = 0";
+        String url = null;
+        try {
+            url = ZocoNetwork.URL_4_QUERY_BOOK + URLEncoder.encode(query, "UTF-8") + "&offset=" + URLEncoder.encode("0", "UTF-8");
+            String encodedurl = null;
+
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         Handler handler = new ZocoHandler() {
             @Override
             public void onReceive(String result) {
-                Toast.makeText(getBaseContext(),result,Toast.LENGTH_LONG).show();
-                BookInfos infos=new Gson().fromJson(result, BookInfos.class);
+                Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+                BookInfos searchedInfos=new Gson().fromJson(result, BookInfos.class);
+                infos.addAll(searchedInfos);
+                bookListAdapter.notifyDataSetChanged();
             }
         };
 
-        new ReqTask(getBaseContext(),ZocoNetwork.Method.GET).setHandler(handler).execute(url);
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.GET).setHandler(handler).execute(url);
         return false;
     }
 
@@ -200,7 +238,7 @@ public class MainActivity extends ActionBarActivity implements
         int id = item.getItemId();
         if (id == R.id.action_settings) {
             return true;
-        }else if(id == R.id.register) {
+        } else if (id == R.id.register) {
             Toast.makeText(getBaseContext(), "register", Toast.LENGTH_LONG).show();
             startActivityForResult(new Intent("com.google.zxing.client.android.SCAN"), 0);
         }
@@ -210,8 +248,8 @@ public class MainActivity extends ActionBarActivity implements
     @Override
     protected void onActivityResult(int requestCode, int requestResult, Intent intent) {
         // TODO Auto-generated method stub
-        if(requestCode == 0) {
-            if(requestResult == RESULT_OK) {
+        if (requestCode == 0) {
+            if (requestResult == RESULT_OK) {
                 String contents = intent.getStringExtra("SCAN_RESULT");
 //				Toast.makeText(getBaseContext(), "result : " + contents, Toast.LENGTH_LONG).show();
                 BookScanTask worker = new BookScanTask();
@@ -220,6 +258,7 @@ public class MainActivity extends ActionBarActivity implements
             }
         }
     }
+
     //처음 url, progress 값,
     class BookScanTask extends AsyncTask<String, Void, String> {
 
@@ -231,7 +270,7 @@ public class MainActivity extends ActionBarActivity implements
             String requestURL = ZocoConstants.NAVER_SEARCH_URL + isbn;
             Log.e("KDH url", requestURL);
             try {
-                result=new ZocoNetwork().setGetOption(requestURL).execute();
+                result = new ZocoNetwork().setGetOption(requestURL).execute();
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
@@ -246,14 +285,14 @@ public class MainActivity extends ActionBarActivity implements
             // TODO Auto-generated method stub
             Serializer serializer = new Persister();
             try {
-                Book book=serializer.read(Book.class, result);
+                Book book = serializer.read(Book.class, result);
                 Intent intent = new Intent(getBaseContext(), BookRegisterActivity.class);
-                intent.putExtra(BOOK_INFO,book.getBookContent());
+                intent.putExtra(BOOK_INFO, book.getBookContent());
                 startActivity(intent);
             } catch (Exception e) {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
-                Toast.makeText(getBaseContext(),"cannot get book info",Toast.LENGTH_LONG).show();
+                Toast.makeText(getBaseContext(), "cannot get book info", Toast.LENGTH_LONG).show();
             }
             super.onPostExecute(result);
         }
