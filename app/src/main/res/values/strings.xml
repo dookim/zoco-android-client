@@ -10,4 +10,7 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
 
+    <!-- app id for facebook login-->
+    <string name="app_id">423918437766756</string>
+
 </resources>

@@ -23,6 +23,7 @@ dependencies {
     compile 'com.android.support:appcompat-v7:21.0.3'
     compile 'de.hdodenhof:circleimageview:1.2.1'
     compile 'com.jakewharton:disklrucache:2.0.2'
+    compile 'com.facebook.android:facebook-android-sdk:3.23.0'
     compile files('libs/simple-xml-2.7.1.jar')
     compile files('libs/gson-2.2.jar')
 }
