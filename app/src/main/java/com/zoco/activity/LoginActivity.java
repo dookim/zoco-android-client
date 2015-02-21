@@ -25,6 +25,8 @@ import com.zoco.obj.User;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
@@ -47,6 +49,7 @@ public class LoginActivity extends Activity {
     private String email;
     private String school;
     private String provider;
+    private String password;
 
     private ZocoPreference pref;
 
@@ -68,7 +71,8 @@ public class LoginActivity extends Activity {
         if (!provider.equals("0")) {
             email = pref.getValue("email", "0");
             school = pref.getValue("school", "0");
-            getInfo(email, school);
+            password = pref.getValue("password", "0");
+            checkGetInfo(email, school);
             //로그인 한 적 있음
         }
 
@@ -125,8 +129,17 @@ public class LoginActivity extends Activity {
                                             school = school_obj
                                                     .optString("name");
 
+                                            password = createPassword(provider + email + school);
+
+                                            pref.put("provider", Provider.facebook.name());
+                                            pref.put("email", email);
+                                            pref.put("school", school);
+                                            pref.put("password", password);
+
                                             Log.d(TAG, "email : " + email);
                                             Log.d(TAG, "school : " + school);
+
+                                            registerPostInfo(email, school, provider, password);
                                         }
                                     }
                                 }
@@ -201,17 +214,53 @@ public class LoginActivity extends Activity {
     Handler handler = new ZocoHandler() {
         @Override
         public void onReceive(String result) {
-            if ("registered".equals(result)) {
+            if ("login success".equals(result)) {
                 startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish();
+            }
+
+            if ("registered".equals(result) || "success".equals(result)) {
+                loginPostInfo(email, provider, password);
             }
 
         }
     };
 
-    private void getInfo(String email, String school) {
+    private void checkGetInfo(String email, String school) {
         User user = new User(email, school);
         String userdata = new Gson().toJson(user);
-        new ReqTask(getBaseContext(), ZocoNetwork.Method.GET).setHandler(handler).execute(ZocoNetwork.URL_4_REGISTER_BOOK +"is_register/", userdata);
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.GET).setHandler(handler).execute(ZocoNetwork.URL_4_REGISTER_BOOK + "is_register/", userdata);
+    }
+
+    private void registerPostInfo(String email, String school, String provider, String password) {
+        User user = new User(email, school, provider, password);
+        String userdata = new Gson().toJson(user);
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).setHandler(handler).execute(ZocoNetwork.URL_4_REGISTER_BOOK + ZocoNetwork.SUFFIX_4_REGISTER_BOOK, userdata);
+    }
+
+    private void loginPostInfo(String email, String provider, String password) {
+        User user = new User(email, provider, password);
+        String userdata = new Gson().toJson(user);
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).setHandler(handler).execute(ZocoNetwork.URL_4_REGISTER_BOOK + ZocoNetwork.SUFFIX_4_LOGIN, userdata);
+    }
+
+    private String createPassword(String str) {
+        String pw = "";
+        try {
+            MessageDigest sh = MessageDigest.getInstance("SHA-256");
+            sh.update(str.getBytes());
+            byte byteData[] = sh.digest();
+            StringBuffer sb = new StringBuffer();
+            for (int i = 0; i < byteData.length; i++) {
+                sb.append(Integer.toString((byteData[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            pw = sb.toString();
+
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+            pw = null;
+        }
+        return pw;
     }
 
 }
