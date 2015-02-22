@@ -52,6 +52,7 @@ public class LoginActivity extends Activity {
     private String password;
 
     private ZocoPreference pref;
+    private boolean isLogin;
 
     private enum Provider {
         facebook, google, kaako;
@@ -64,24 +65,25 @@ public class LoginActivity extends Activity {
         uiHelper.onCreate(savedInstanceState);
 
         pref = new ZocoPreference(this);
-
         provider = pref.getValue("provider", "0");
+        isLogin = true;
 
+        if (getIntent() != null) {
+            setLogOut();
+            isLogin = false;
+        }
 
-        if (!provider.equals("0")) {
+        if (isLogin && !provider.equals("0")) {
             email = pref.getValue("email", "0");
             school = pref.getValue("school", "0");
             password = pref.getValue("password", "0");
-            checkGetInfo(email, school);
+            checkRegister(email, school);
             //로그인 한 적 있음
         }
 
 
         setContentView(R.layout.login_layout);
 
-        if (getIntent() != null) {
-            setLogOut();
-        }
 
         initFaceBook();
     }
@@ -139,7 +141,7 @@ public class LoginActivity extends Activity {
                                             Log.d(TAG, "email : " + email);
                                             Log.d(TAG, "school : " + school);
 
-                                            registerPostInfo(email, school, provider, password);
+                                            registerUser(email, school, provider, password);
                                         }
                                     }
                                 }
@@ -207,7 +209,6 @@ public class LoginActivity extends Activity {
         if (session != null && session.isOpened()) {
             Log.d(TAG, "logout ***");
             Session.getActiveSession().closeAndClearTokenInformation();
-
         }
     }
 
@@ -220,27 +221,27 @@ public class LoginActivity extends Activity {
             }
 
             if ("registered".equals(result) || "success".equals(result)) {
-                loginPostInfo(email, provider, password);
+                loginUser(email, provider, password);
             }
-
         }
     };
 
-    private void checkGetInfo(String email, String school) {
-        User user = new User(email, school);
-        String userdata = new Gson().toJson(user);
-        new ReqTask(getBaseContext(), ZocoNetwork.Method.GET).setHandler(handler).execute(ZocoNetwork.URL_4_REGISTER_BOOK + "is_register/", userdata);
+    private void checkRegister(String email, String school) {
+        Log.d(TAG, "checkRegister URL : " + ZocoNetwork.URL_4_IS_REGISTER + ZocoNetwork.SUFFIX_4_PROVIDER + provider + ZocoNetwork.SUFFIX_4_EMAIL + email);
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.GET).setHandler(handler).execute(ZocoNetwork.URL_4_IS_REGISTER + ZocoNetwork.SUFFIX_4_PROVIDER + provider + ZocoNetwork.SUFFIX_4_EMAIL + email);
     }
 
-    private void registerPostInfo(String email, String school, String provider, String password) {
+    private void registerUser(String email, String school, String provider, String password) {
         User user = new User(email, school, provider, password);
         String userdata = new Gson().toJson(user);
-        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).setHandler(handler).execute(ZocoNetwork.URL_4_REGISTER_BOOK + ZocoNetwork.SUFFIX_4_REGISTER_BOOK, userdata);
+        Log.d(TAG, "registerUser URL : " + ZocoNetwork.URL_4_REGISTER);
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).setHandler(handler).execute(ZocoNetwork.URL_4_REGISTER, userdata);
     }
 
-    private void loginPostInfo(String email, String provider, String password) {
+    private void loginUser(String email, String provider, String password) {
         User user = new User(email, provider, password);
         String userdata = new Gson().toJson(user);
+        Log.d(TAG, "loginUser URL : " + ZocoNetwork.URL_4_REGISTER_BOOK + ZocoNetwork.SUFFIX_4_LOGIN);
         new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).setHandler(handler).execute(ZocoNetwork.URL_4_REGISTER_BOOK + ZocoNetwork.SUFFIX_4_LOGIN, userdata);
     }
 

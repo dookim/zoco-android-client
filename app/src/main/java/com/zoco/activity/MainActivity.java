@@ -211,7 +211,7 @@ public class MainActivity extends ActionBarActivity implements
             @Override
             public void onReceive(String result) {
                 Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
-                BookInfos searchedInfos=new Gson().fromJson(result, BookInfos.class);
+                BookInfos searchedInfos = new Gson().fromJson(result, BookInfos.class);
                 infos.addAll(searchedInfos);
                 bookListAdapter.notifyDataSetChanged();
             }
@@ -237,6 +237,10 @@ public class MainActivity extends ActionBarActivity implements
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
         if (id == R.id.action_settings) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            intent.putExtra("logout", "setLogOut");
+            startActivity(intent);
+            finish();
             return true;
         } else if (id == R.id.register) {
             Toast.makeText(getBaseContext(), "register", Toast.LENGTH_LONG).show();
