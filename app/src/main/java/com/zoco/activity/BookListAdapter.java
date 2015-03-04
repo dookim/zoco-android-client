@@ -9,6 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,15 +28,14 @@ import de.hdodenhof.circleimageview.CircleImageView;
  * Created by dookim on 2/14/15.
  */
 
-
 public class BookListAdapter extends ArrayAdapter<BookInfo> {
+
     protected final Context context;
     private final ArrayList<BookInfo> values;
     DiskLruImageCache diskLruImageCache;
     //캐시!
     //만약에 캐시의 유일한 이름이 사랑질때 새롭게 생성되는지 여부에 대해서 파악할것?
     //아마 예상한대로 될것
-
     public BookListAdapter(Context context, ArrayList<BookInfo> values) {
         super(context, R.layout.list_item, values);
         this.context = context;
@@ -59,11 +59,13 @@ public class BookListAdapter extends ArrayAdapter<BookInfo> {
         TextView title = (TextView) rowView.findViewById(R.id.title);
         TextView author = (TextView) rowView.findViewById(R.id.author);
         TextView price = (TextView) rowView.findViewById(R.id.price);
+        Button msgBtn = (Button)rowView.findViewById(R.id.msgBtn);
 
         BookInfo item = (BookInfo) getItem(position);
 
         String isbn_4_cache = item.isbn.replaceAll(" ", "_");
         Bitmap bitmap = diskLruImageCache.getBitmap(isbn_4_cache);
+
         if (bitmap == null) {
             try {
                 new DownloadImageTask(bookImage, diskLruImageCache, isbn_4_cache).execute(ZocoNetwork.URL_4_QUERY_IMAGE + URLEncoder.encode(item.isbn, "UTF-8"));

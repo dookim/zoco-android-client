@@ -5,9 +5,11 @@ package com.zoco.obj;
  */
 public class User {
     public String email;
+    public String provider;
     public String univ;
-    public User(String email, String univ) {
+    public User(String email, String univ, String provider) {
         this.email = email;
         this.univ = univ;
+        this.provider = provider;
     }
 }

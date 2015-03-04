@@ -1322,7 +1322,8 @@ containing a value of this type.
         public static final int drawer_shadow=0x7f020033;
         public static final int ic_drawer=0x7f020034;
         public static final int ic_launcher=0x7f020035;
-        public static final int plus=0x7f020036;
+        public static final int line=0x7f020036;
+        public static final int plus=0x7f020037;
     }
     public static final class id {
         public static final int action_bar=0x7f080031;
@@ -1338,10 +1339,11 @@ containing a value of this type.
         public static final int action_mode_bar=0x7f08002e;
         public static final int action_mode_bar_stub=0x7f08002d;
         public static final int action_mode_close_button=0x7f080020;
-        public static final int action_search=0x7f08004d;
-        public static final int action_settings=0x7f08004c;
+        public static final int action_search=0x7f08004e;
+        public static final int action_settings=0x7f08004d;
         public static final int activity_chooser_view_content=0x7f080021;
         public static final int always=0x7f080016;
+        public static final int answer_question=0x7f08004c;
         public static final int author=0x7f080045;
         public static final int beginning=0x7f080013;
         public static final int book=0x7f080041;
@@ -1379,7 +1381,7 @@ containing a value of this type.
         public static final int progress_circular=0x7f080005;
         public static final int progress_horizontal=0x7f080006;
         public static final int radio=0x7f08002b;
-        public static final int register=0x7f08004e;
+        public static final int register=0x7f08004f;
         public static final int scribble=0x7f080047;
         public static final int search_badge=0x7f080035;
         public static final int search_bar=0x7f080034;

@@ -64,7 +64,6 @@ public class MainActivity extends ActionBarActivity implements
     BookListAdapter bookListAdapter;
     ListView bookListView;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,7 +79,7 @@ public class MainActivity extends ActionBarActivity implements
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         //login
-        login();
+        //login();
 
         //make dir for image;
         mkImageDir();
@@ -93,11 +92,27 @@ public class MainActivity extends ActionBarActivity implements
     }
 
     private void login() {
+        //provider 추가
+        //password추가
         User user = new User("doo871128@gmail.com", "hufs");
         String userData = new Gson().toJson(user);
+
+        Handler handler  = new ZocoHandler() {
+            @Override
+            public void onReceive(String result) {
+                //event 정의할것
+
+            }
+        };
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.GET).setHandler(handler).execute(ZocoNetwork.URL_4_IS_REGISTER);
+
+        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).setHandler(handler).execute(ZocoNetwork.URL_4_QUERY_BOOK + "bookname","json");
+        /*
         new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_LOGIN, userData);
         new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_REGISTER_USER, userData);
         new ReqTask(getBaseContext(), ZocoNetwork.Method.GET).execute(ZocoNetwork.SERVER_URL_4_READ + "test");
+        */
+        //new ReqTask(getBaseContext(), ZocoNetwork.Method.GET).execute("http://14.49.36.193:33333/auth/facebook");
     }
 
     private void mkImageDir() {
@@ -210,8 +225,9 @@ public class MainActivity extends ActionBarActivity implements
         Handler handler = new ZocoHandler() {
             @Override
             public void onReceive(String result) {
-                Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
+                //Toast.makeText(getBaseContext(), result, Toast.LENGTH_LONG).show();
                 BookInfos searchedInfos=new Gson().fromJson(result, BookInfos.class);
+                infos.clear();
                 infos.addAll(searchedInfos);
                 bookListAdapter.notifyDataSetChanged();
             }

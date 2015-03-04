@@ -339,7 +339,8 @@ int drawable abc_textfield_search_material 0x7f020032
 int drawable drawer_shadow 0x7f020033
 int drawable ic_drawer 0x7f020034
 int drawable ic_launcher 0x7f020035
-int drawable plus 0x7f020036
+int drawable line 0x7f020036
+int drawable plus 0x7f020037
 int id action_bar 0x7f080031
 int id action_bar_activity_content 0x7f080000
 int id action_bar_container 0x7f080030
@@ -353,10 +354,11 @@ int id action_menu_presenter 0x7f080003
 int id action_mode_bar 0x7f08002e
 int id action_mode_bar_stub 0x7f08002d
 int id action_mode_close_button 0x7f080020
-int id action_search 0x7f08004d
-int id action_settings 0x7f08004c
+int id action_search 0x7f08004e
+int id action_settings 0x7f08004d
 int id activity_chooser_view_content 0x7f080021
 int id always 0x7f080016
+int id answer_question 0x7f08004c
 int id author 0x7f080045
 int id beginning 0x7f080013
 int id book 0x7f080041
@@ -394,7 +396,7 @@ int id price 0x7f080046
 int id progress_circular 0x7f080005
 int id progress_horizontal 0x7f080006
 int id radio 0x7f08002b
-int id register 0x7f08004e
+int id register 0x7f08004f
 int id scribble 0x7f080047
 int id search_badge 0x7f080035
 int id search_bar 0x7f080034

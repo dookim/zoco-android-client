@@ -7,7 +7,6 @@ import android.os.Message;
 import android.widget.Toast;
 
 
-
 /**
  * Created by duhyeong1.kim on 2015-02-10.
  */
