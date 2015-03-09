@@ -72,7 +72,7 @@ public class ClientThread extends Thread {
 	 * so, server remove socket and socketchannel
 	 */
 	public void sendFinMessage() throws IOException {
-		String msg = ZocoConstants.PROTOCOL + ZocoConstants.BEHAVIOUR_FIN + "//" + user.chatId;
+		String msg = ZocoConstants.PROTOCOL + ZocoConstants.BEHAVIOUR_FIN + "//" + user.id;
 		sayToServer(msg);
 	}
 
@@ -87,7 +87,7 @@ public class ClientThread extends Thread {
 	 */
 	public void sendMessage(String oppositeChatId, int bookId, int chattingIndex, String msgContent) throws IOException {
 		//String msg = "ZocoChat://message//" + bookId + "//" + chattingIndex + "//" + System.currentTimeMillis() + "//" + user.email + "//" + user.chatId + "//" + oppositeChatId + "//" + msgContent;
-		String msg = ZocoConstants.PROTOCOL + ZocoConstants.BEHAVIOUR_MESSAGE + "//" + bookId + "//" + chattingIndex + "//" + System.currentTimeMillis() + "//" + user.nickName + "//" + user.chatId + "//" + oppositeChatId + "//" + msgContent;
+		String msg = ZocoConstants.PROTOCOL + ZocoConstants.BEHAVIOUR_MESSAGE + "//" + bookId + "//" + chattingIndex + "//" + System.currentTimeMillis() + "//" + user.nickname + "//" + user.id + "//" + oppositeChatId + "//" + msgContent;
 		sayToServer(msg);
 	}
 	
@@ -104,7 +104,7 @@ public class ClientThread extends Thread {
 	 *  
 	 */
 	private void sendAskMessage() throws IOException {
-		String msg = ZocoConstants.PROTOCOL + ZocoConstants.BEHAVIOUR_ASK + "//" + user.chatId;
+		String msg = ZocoConstants.PROTOCOL + ZocoConstants.BEHAVIOUR_ASK + "//" + user.id;
 		sayToServer(msg);
 	}
 	
@@ -115,7 +115,7 @@ public class ClientThread extends Thread {
 	 * the reason why client send init message is to get the unreceived messages
 	 */
 	private void sendInitMessage(int lastReceivedIndex) throws IOException {
-		String msg = ZocoConstants.PROTOCOL + ZocoConstants.BEHAVIOUR_INIT + "//" + user.chatId + "//" + lastReceivedIndex;
+		String msg = ZocoConstants.PROTOCOL + ZocoConstants.BEHAVIOUR_INIT + "//" + user.id + "//" + lastReceivedIndex;
 		sayToServer(msg);
 	}
 	
@@ -129,7 +129,7 @@ public class ClientThread extends Thread {
 	 * client should send cofirm message because the client which sent message confirm whether another client received or not 
 	 */
 	 public void sendConfirmMessage(int bookId, String oppositeChatId, int chattingIndex) throws IOException {
-		String msg = ZocoConstants.PROTOCOL + ZocoConstants.BEHAVIOUR_CONFIRM + "//" + bookId + "//" + user.chatId + "//" + oppositeChatId + "//" + chattingIndex;
+		String msg = ZocoConstants.PROTOCOL + ZocoConstants.BEHAVIOUR_CONFIRM + "//" + bookId + "//" + user.id + "//" + oppositeChatId + "//" + chattingIndex;
 		sayToServer(msg);
 	}
 	 /**
