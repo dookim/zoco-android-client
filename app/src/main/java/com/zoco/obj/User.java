@@ -4,12 +4,16 @@ package com.zoco.obj;
  * Created by dookim on 2/8/15.
  */
 public class User {
-    public String email;
+
+    public String nickName;
     public String provider;
     public String univ;
-    public User(String email, String univ, String provider) {
-        this.email = email;
+    public String chatId;
+
+    public User(String nickName, String univ, String provider, String chatId) {
+        this.nickName = nickName;
         this.univ = univ;
         this.provider = provider;
+        this.chatId = chatId;
     }
 }

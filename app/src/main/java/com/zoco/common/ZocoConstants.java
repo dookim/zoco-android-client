@@ -8,5 +8,17 @@ public class ZocoConstants {
     public static final String SD_DIR=Environment.getExternalStorageDirectory().getPath() + "/";
     public static final String SUFFIX_4_IMAGE_DIR= "zoco_image_dir";
     public static final String ZOCO_IMAGE_DIR = SD_DIR + SUFFIX_4_IMAGE_DIR;
+
+
+    //String msg = "ZocoChat://set//";
+    public static final String PROTOCOL = "ZocoChat://";
+
+    //enumerate behaviours!
+    public static final String BEHAVIOUR_SET = "set";
+    public static final String BEHAVIOUR_ASK = "ask";
+    public static final String BEHAVIOUR_INIT = "init";
+    public static final String BEHAVIOUR_MESSAGE = "message";
+    public static final String BEHAVIOUR_FIN = "fin";
+    public static final String BEHAVIOUR_CONFIRM = "confirm";
 	
 }
