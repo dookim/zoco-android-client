@@ -39,7 +39,7 @@ public class User {
      * @param provider
      * @param univ
      * @param password
-     * in order to register user to server, client should this information below
+     * in order to register user to server, client should send this information below
      * whether client is registered or not, server always send "success"
      */
     public User(String email, String nickname, String provider, String univ, String password) {
