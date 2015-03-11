@@ -21,6 +21,16 @@
             android:textSize="50sp" />
     </LinearLayout>
 
+    <!-- Login progress -->
+    <ProgressBar
+        android:id="@+id/login_progress"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="8dp"
+        android:visibility="gone" />
+
     <LinearLayout
         android:id="@+id/login_register"
         android:layout_width="match_parent"
@@ -49,14 +59,14 @@
             facebook:confirm_logout="false"
             facebook:fetch_user_info="true" />
 
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-
-            <Button
-                android:id="@+id/sign_in_button"
+            <com.google.android.gms.common.SignInButton
+                android:id="@+id/plus_sign_in_button"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1" />
@@ -71,4 +81,4 @@
         </LinearLayout>
     </LinearLayout>
 
-</RelativeLayout><!-- From: file:/D:/zoco1/zoco-android-client/app/src/main/res/layout/login_layout.xml -->
+</RelativeLayout><!-- From: file:/D:/zoco0307/zoco-android-client/app/src/main/res/layout/login_layout.xml -->

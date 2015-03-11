@@ -31,7 +31,6 @@ import com.zoco.common.ZocoHandler;
 import com.zoco.common.ZocoNetwork;
 import com.zoco.obj.Book;
 import com.zoco.obj.BookInfos;
-import com.zoco.obj.User;
 
 import org.simpleframework.xml.Serializer;
 import org.simpleframework.xml.core.Persister;
@@ -80,7 +79,7 @@ public class MainActivity extends ActionBarActivity implements
         mNavigationDrawerFragment.setUp(R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
         //login
-        login();
+//        login();
 
         //make dir for image;
         mkImageDir();
@@ -92,13 +91,13 @@ public class MainActivity extends ActionBarActivity implements
 
     }
 
-    private void login() {
-        User user = new User("doo871128@gmail.com", "hufs");
-        String userData = new Gson().toJson(user);
-        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_LOGIN, userData);
-        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_REGISTER_USER, userData);
-        new ReqTask(getBaseContext(), ZocoNetwork.Method.GET).execute(ZocoNetwork.SERVER_URL_4_READ + "test");
-    }
+//    private void login() {
+//        User user = new User("doo871128@gmail.com", "hufs");
+//        String userData = new Gson().toJson(user);
+//        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_LOGIN, userData);
+//        new ReqTask(getBaseContext(), ZocoNetwork.Method.POST).execute(ZocoNetwork.URL_4_REGISTER_USER, userData);
+//        new ReqTask(getBaseContext(), ZocoNetwork.Method.GET).execute(ZocoNetwork.SERVER_URL_4_READ + "test");
+//    }
 
     private void mkImageDir() {
         File file = new File(ZocoConstants.ZOCO_IMAGE_DIR);

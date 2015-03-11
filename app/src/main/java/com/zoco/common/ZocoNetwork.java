@@ -30,17 +30,18 @@ public class ZocoNetwork {
     public final static String SUFFIX_4_IS_REGISTER = "is_register/";
     public final static String SUFFIX_4_REGISTER = "register/";
     public final static String SUFFIX_4_LOGIN = "login";
+    public final static String SUFFIX_4_NICKNAME = "?nickname=";
     public final static String SUFFIX_4_PROVIDER = "?provider=";
     public final static String SUFFIX_4_EMAIL = "&email=";
     public final static String SUFFIX_4_QUERY_IMAGE = "query_image/?isbn=";
     public final static String SUFFIX_4_QUERY_BOOK = "query_book/?query=";
-    public final static String URL_4_REGISTER_BOOK = SERVER_URL_4_WRITE + SUFFIX_4_REGISTER_BOOK;
+    public final static String URL_4_REGISTER_BOOK = SERVER_URL_4_READ + SUFFIX_4_LOGIN +"/";
     public final static String URL_4_REGISTER_USER = SERVER_URL_4_WRITE + SUFFIX_4_LOGIN;
     public final static String URL_4_QUERY_BOOK = SERVER_URL_4_READ + SUFFIX_4_QUERY_BOOK;
     public final static String URL_4_QUERY_IMAGE = SERVER_URL_4_READ + SUFFIX_4_QUERY_IMAGE;
     public final static String URL_4_LOGIN = SERVER_URL_4_READ + SUFFIX_4_LOGIN;
     public final static String URL_4_IS_REGISTER = SERVER_URL_4_READ + SUFFIX_4_IS_REGISTER;
-    public final static String URL_4_REGISTER = SERVER_URL_4_READ + SUFFIX_4_REGISTER;
+    public final static String URL_4_REGISTER = SERVER_URL_4_WRITE + SUFFIX_4_REGISTER;
 
     public static HttpClient client = new DefaultHttpClient();
 
